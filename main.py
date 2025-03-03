@@ -1,18 +1,24 @@
+from stats import book_word_count
+import sys
+
 def main():
-    with open("books/frankenstein.txt") as f:
-        text = f.read()
-        word_count = book_word_count(text)
-        each_letter = book_letter_count(text)
-        reporting(each_letter, word_count)
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+    else:
+        with open(sys.argv[1]) as f:
+            text = f.read()
+            word_count = book_word_count(text)
+            each_letter = book_letter_count(text)
+            reporting(each_letter, word_count)
 
-def book_word_count(text):
-    words = text.split()
-    total_words = 0
+#def book_word_count(text):
+#    words = text.split()
+#    total_words = 0
+#
+ #   for word in words:
+  #      total_words += 1
 
-    for word in words:
-        total_words += 1
-
-    return total_words
+   # return total_words
 
 def book_letter_count(text):
     text_lowercased = text.lower()
@@ -35,10 +41,12 @@ def reporting(character_count, word_count):
 
     list_of_alpha.sort(reverse=True, key=sort_on)
     print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{word_count} words found in the document")
+    #print(f"{word_count} words found in the document")
+    print(f"Found {word_count} total words")
     print()
     for char in list_of_alpha:
-        print(f"The \'{char["letter"]}\' was found {char["count"]} times")
+        #print(f"The \'{char["letter"]}\' was found {char["count"]} times")
+        print(f"{char["letter"]}: {char["count"]}")
     print("--- End report ---")
     return
 
